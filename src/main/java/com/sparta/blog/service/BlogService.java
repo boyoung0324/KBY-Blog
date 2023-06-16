@@ -22,33 +22,35 @@ public class BlogService {
 
     //전체 조회
     public List<BlogResponseDto> getContent() {
-        return blogRepo.findAll().stream().map(BlogResponseDto::new).toList();
+        return blogRepo.findAllByOrderByModifiedAtDesc().stream().map(BlogResponseDto::new).toList();
     } //왜 response생성자 만드니까 작동을 하w죠?
 
 
     //삭제
-    public Integer deleteContent(Integer bno) {
+    @Transactional
+    public Integer deleteContent(Integer bno, String pwd) {
+
+
         Blog blog = findContent(bno);
-        if (blog != null) {
+
+        if (pwd.equals(blog.getPwd())) {
             blogRepo.deleteById(bno);
-        } else {
-            System.out.println("해당하는 글이 없습니다.");
-        }
-        return bno;
+            return 1;
+        } else return 0;
+
+
     }
 
 
     //업뎃 -> setter로 값 수정(udpate_Transaction)
     @Transactional
-    public Integer updateContent(Integer bno, BlogRequestDto requestDto) {
+    public Blog updateContent(Integer bno, BlogRequestDto requestDto) {
         Blog blog = findContent(bno);
 
-        if (blog != null) {
-            blog.update(requestDto);
-        } else {
-            System.out.println("해당하는 글이 없습니다.");
-        }
-        return bno;
+
+        if (blog.getPwd().equals(requestDto.getPwd())) blog.update(requestDto);
+
+        return blog;
     }
 
 

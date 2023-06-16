@@ -21,11 +21,14 @@ public class Blog extends Timestamped{
     String content;
     @Column(name = "writer", nullable = false)
     String writer;
+    @Column(name = "pwd", nullable = false)
+    String pwd;
 
     public Blog(BlogRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.writer = requestDto.getWriter();
+        this.pwd = requestDto.getPwd();
     }
 
     public void update(BlogRequestDto requestDto) {

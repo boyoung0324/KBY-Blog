@@ -23,17 +23,18 @@ class BlogServiceTest {
     @Autowired
     BlogService service;
 
-    @BeforeEach //테스트마다 데이터 넣는 것이 실행되도록
-    public void testData() {
-        for (int i = 0; i < 100; i++) {
-            Blog blog = new Blog();
-            blog.setBno(i);
-            blog.setTitle("title" + i);
-            blog.setContent("content" + i);
-            blog.setWriter("writer" + (i % 5));
-            blogRepo.save(blog);
-        }
-    }
+//    @BeforeEach //테스트마다 데이터 넣는 것이 실행되도록
+//    public void testData() {
+//        for (int i = 0; i < 100; i++) {
+//            Blog blog = new Blog();
+//            blog.setBno(i);
+//            blog.setTitle("title" + i);
+//            blog.setContent("content" + i);
+//            blog.setWriter("writer" + (i % 5));
+//            blog.setPwd("pwd" + (i % 5));
+//            blogRepo.save(blog);
+//        }
+//    }
 
     @Test
     void getContent() {
@@ -45,7 +46,7 @@ class BlogServiceTest {
 
     @Test
     void deleteContent() {
-        blogRepo.deleteById(10);
+        blogRepo.deleteById(100);
     }
 
 
@@ -57,6 +58,8 @@ class BlogServiceTest {
         System.out.println("blog = " + blog);
 
     }
+
+
     }
 
 

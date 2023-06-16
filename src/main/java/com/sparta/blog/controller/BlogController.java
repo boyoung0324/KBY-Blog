@@ -39,15 +39,19 @@ public class BlogController {
 
     //삭제
     @DeleteMapping("/blog/{bno}")
-    public Integer delete(@PathVariable Integer bno) {
-        service.deleteContent(bno);
-        return bno;
+    public String delete(@PathVariable Integer bno, @RequestBody String pwd) {
+        int checkNum = service.deleteContent(bno,pwd);
+
+        if(checkNum != 1) return "삭제 실패";
+
+        return "삭제 완료";
+
     }
 
 
     //수정
     @PutMapping("/blog/{bno}")
-    public Integer update(@PathVariable Integer bno,@RequestBody BlogRequestDto requestDto){
+    public Blog update(@PathVariable Integer bno,@RequestBody BlogRequestDto requestDto){
         return service.updateContent(bno,requestDto);
     }
 
