@@ -23,7 +23,7 @@ public class BlogService {
     //전체 조회
     public List<BlogResponseDto> getContent() {
         return blogRepo.findAllByOrderByModifiedAtDesc().stream().map(BlogResponseDto::new).toList();
-    } //왜 response생성자 만드니까 작동을 하w죠?
+    } 
 
 
     //삭제
