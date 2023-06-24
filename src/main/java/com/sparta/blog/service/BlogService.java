@@ -55,6 +55,7 @@ public class BlogService {
 
 
     //작성
+     @Transactional
     public BlogResponseDto writeContent(BlogRequestDto requestDto) {
         Blog blog = new Blog(requestDto);
         Blog saveBlog = blogRepo.save(blog);
